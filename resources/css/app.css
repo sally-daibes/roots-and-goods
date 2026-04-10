@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+    --color-parchment: #e9dec9;
+    --color-text-dark: #3e2a14;
+    --color-text-light: #fdfaf6;
+    --color-accent-red: #8b2318;
+    --color-accent-red-hover: #6d1a11;
+    --color-border-tan: #c9b9a1;
+
+    --font-headings: "Playfair Display", serif;
+    --font-body: "Lato", sans-serif;
+    --font-logo: "Cinzel", serif;
+}
+
+@import "tailwindcss";
+
+@theme {
+    --color-parchment: #e9dec9;
+    --color-text-dark: #3e2a14;
+    --color-text-light: #fdfaf6;
+    --color-accent-red: #8b2318;
+    --color-accent-red-hover: #6d1a11;
+    --color-border-tan: #c9b9a1;
+
+    --font-headings: "Playfair Display", serif;
+    --font-body: "Lato", sans-serif;
+    --font-logo: "Cinzel", serif;
+}
+
+@layer base {
+    body {
+        background-color: var(--color-parchment);
+        /* FIX: Changed to absolute path for Vite */
+        background-image: url('/images/1.jpeg');
+        background-size: cover;
+        background-attachment: fixed;
+    }
+}
+
+@layer components {
+    .bg-hero {
+        /* FIX: Changed to absolute path for Vite */
+        background-image: url('/images/main.png');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .bg-footer {
+        background-color: #2a241b;
+        /* FIX: Changed to absolute path for Vite */
+        background-image: url('/images/thrirteen (2).png');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .stitched-banner {
+        background-color: var(--color-accent-red);
+        color: var(--color-text-light);
+        border: 1px dashed rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 0 4px var(--color-accent-red), 0 4px 10px rgba(0,0,0,0.4);
+        position: relative;
+    }
+
+    .arch-frame {
+        background: #f4ecdf;
+        border: 2px solid var(--color-border-tan);
+        border-radius: 120px 120px 0 0;
+        padding: 8px;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.15);
+        position: relative;
+        width: 100%;
+    }
+    
+    .arch-frame img {
+        border-radius: 110px 110px 0 0;
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+        background-color: #eaddc4; 
+    }
+
+    .polaroid-card {
+        background: #f4ecdf;
+        padding: 10px;
+        border: 1px solid var(--color-border-tan);
+        box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .tatreez-strip {
+        background-image: 
+            linear-gradient(45deg, var(--color-accent-red) 25%, transparent 25%, transparent 75%, var(--color-accent-red) 75%, var(--color-accent-red)),
+            linear-gradient(45deg, var(--color-accent-red) 25%, transparent 25%, transparent 75%, var(--color-accent-red) 75%, var(--color-accent-red)),
+            linear-gradient(-45deg, #4b5e31 25%, transparent 25%, transparent 75%, #4b5e31 75%, #4b5e31),
+            linear-gradient(-45deg, #4b5e31 25%, transparent 25%, transparent 75%, #4b5e31 75%, #4b5e31);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px, 10px 0, 0 10px;
+    }
+}
