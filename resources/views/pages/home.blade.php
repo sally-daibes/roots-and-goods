@@ -1,6 +1,6 @@
 
 
-@extends('layouts.app')
+@extends('layouts.front')
 
 @section('content')
     <!-- ─── HERO SECTION (Left Aligned exactly like the design) ─── -->
