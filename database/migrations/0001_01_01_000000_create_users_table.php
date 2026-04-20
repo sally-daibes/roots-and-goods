@@ -6,19 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            
+            // This now works perfectly because the roles table was built in the previous file!
+            $table->foreignId('role_id')->constrained('roles')->restrictOnDelete();
+            
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable(); 
+            $table->string('provider_name')->nullable(); 
+            $table->string('provider_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes(); 
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -37,9 +41,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');

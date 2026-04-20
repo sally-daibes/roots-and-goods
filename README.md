@@ -56,3 +56,64 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Roots & Goods 🌿
+
+Roots & Goods is an authentic e-commerce platform designed to bridge the gap between local Palestinian cooperatives and global consumers. The platform highlights heritage, quality, and community empowerment through a highly customized, culturally rich user interface.
+
+## 🚀 Tech Stack
+
+- **Framework:** Laravel 11 (PHP)
+- **Frontend Styling:** Tailwind CSS v4 + Custom CSS (for complex textures/patterns)
+- **Templating Engine:** Laravel Blade
+- **Asset Bundler:** Vite (powered by Rolldown)
+
+## 📁 Project Architecture
+
+- **`resources/views/layouts/app.blade.php`**: The master layout (Navbar & Footer).
+- **`resources/views/pages/home.blade.php`**: The main landing page.
+- **`resources/css/app.css`**: Tailwind v4 `@theme` configuration and custom UI components (Tatreez borders, arches, textures).
+- **`public/images/`**: Local repository for all static visual assets.
+
+## ⚙️ Local Development Setup
+
+Follow these steps to run the project locally:
+
+**1. Clone the repository**
+\`\`\`bash
+git clone https://github.com/your-username/roots-and-goods.git
+cd roots-and-goods
+\`\`\`
+
+**2. Install Backend Dependencies**
+\`\`\`bash
+composer install
+\`\`\`
+
+**3. Install Frontend Dependencies**
+\`\`\`bash
+npm install
+\`\`\`
+
+**4. Environment Setup**
+Copy the example env file and generate an application key:
+\`\`\`bash
+cp .env.example .env
+php artisan key:generate
+\`\`\`
+
+**5. Start the Development Servers**
+You must run *both* of these commands in two separate terminal tabs:
+
+*Terminal Tab 1 (PHP Backend):*
+\`\`\`bash
+php artisan serve
+\`\`\`
+
+*Terminal Tab 2 (Vite Frontend Compiler):*
+\`\`\`bash
+npm run dev
+\`\`\`
+
+**6. View the App**
+Open your browser and navigate to: `http://127.0.0.1:8000`
