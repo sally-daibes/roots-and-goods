@@ -28,6 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Check the user's role and redirect them to the correct page
+        if ($request->user()->role === 'customer') {
+            return redirect()->intended(route('market', absolute: false));
+        }
+
+        // Cooperatives and Admins will go to the Dashboard for now
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

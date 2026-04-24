@@ -34,19 +34,27 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:customer,cooperative'], // Validate the role
         ]);
 
-       $user = User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => 2, // <-- Add this line (Use whatever ID represents a normal user)
+            'role' => $request->role, // Save the role
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
+        // Check the user's role and redirect them to the correct page
+        if ($user->role === 'customer') {
+            return redirect(route('market', absolute: false));
+        }
+
+        // Cooperatives and Admins will go to the Dashboard for now
         return redirect(route('dashboard', absolute: false));
+    }
     }
 }

@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             
             // This now works perfectly because the roles table was built in the previous file!
-            $table->foreignId('role_id')->constrained('roles')->restrictOnDelete();
+            $table->foreignId('role_id')->nullable()->constrained();
             
             $table->string('name');
             $table->string('email')->unique();

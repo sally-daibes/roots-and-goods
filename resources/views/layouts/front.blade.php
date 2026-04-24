@@ -1,44 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roots & Goods</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Lato:wght@400;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Roots & Goods') }}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="store-theme m-0 p-0 box-border overflow-x-hidden leading-relaxed">
+<body class="font-sans text-text-dark antialiased bg-[#eae0cd] bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.06\'/%3E%3C/svg%3E')] flex flex-col min-h-screen">
 
-    <!-- ─── TOP NAVBAR ─── -->
-    <nav class="flex flex-col md:flex-row justify-between items-center py-4 px-10 border-b border-[#c9b9a1]/50 bg-[#e9dec9]/90 backdrop-blur-sm z-50 relative shadow-sm">
-        <div class="flex items-center gap-3">
-            <i class="fas fa-tree text-2xl text-[#3e2a14]"></i>
+    <nav class="w-full bg-[#f4ecd8] border-b border-[#c9b9a1] shadow-sm px-8 py-4 flex justify-between items-center z-50 relative">
+        
+        <a href="/" class="flex items-center gap-3">
+            <i class="fas fa-tree text-3xl text-[#3e2a14]"></i>
             <div style="font-family: 'Cinzel', serif;" class="text-2xl font-bold leading-none flex flex-col text-[#3e2a14]">
                 <span>Roots</span>
                 <span>& Goods</span>
             </div>
+        </a>
+
+        <div class="hidden md:flex items-center gap-6 font-headings font-bold text-[15px] text-[#3e2a14]">
+            <a href="/" class="hover:text-[#8b2318] transition-colors">Home</a>
+            <span class="text-[#c9b9a1] text-[10px]">●</span>
+            <a href="{{ route('about') }}" class="hover:text-[#8b2318] transition-colors">About Us</a>
+            <span class="text-[#c9b9a1] text-[10px]">●</span>
+            <a href="#" class="hover:text-[#8b2318] transition-colors">Cooperatives</a>
+            <span class="text-[#c9b9a1] text-[10px]">●</span>
+            <a href="{{ route('market') }}" class="hover:text-[#8b2318] transition-colors">Shop</a>
+            <span class="text-[#c9b9a1] text-[10px]">●</span>
+            <a href="#" class="hover:text-[#8b2318] transition-colors">Contact</a>
         </div>
 
-        <ul class="flex flex-wrap justify-center items-center gap-6 text-[14px] font-bold tracking-wide text-[#3e2a14]">
-            <li><a href="/" class="hover:text-[#8b2318] transition-colors">Home</a></li>
-            <li class="text-[8px] opacity-40">●</li>
-            <li><a href="/about" class="hover:text-[#8b2318] transition-colors">About Us</a></li>
-            <li class="text-[8px] opacity-40">●</li>
-            <li><a href="#" class="hover:text-[#8b2318] transition-colors">Cooperatives</a></li>
-            <li class="text-[8px] opacity-40">●</li>
-            <li><a href="#" class="hover:text-[#8b2318] transition-colors">Shop</a></li>
-            <li class="text-[8px] opacity-40">●</li>
-            <li><a href="#" class="hover:text-[#8b2318] transition-colors">Contact</a></li>
-        </ul>
-
         <div class="flex items-center gap-5 text-lg text-[#3e2a14]">
+            
             @auth
-                <a href="{{ url('/dashboard') }}" class="text-[14px] font-bold text-[#8b2318] hover:opacity-70">Dashboard</a>
+                @if(auth()->user()->role === 'customer')
+                    <a href="{{ route('wishlist.index') }}" class="hover:text-[#8b2318] transition-colors relative" title="My Wishlist">
+    <i class="far fa-heart text-xl"></i>
+    <span class="absolute -top-1.5 -right-2 bg-[#8b2318] text-[#fdfaf6] text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-sm">0</span>
+</a>
+
+<a href="{{ route('cart.index') }}" class="hover:text-[#8b2318] transition-colors relative mr-3" title="My Basket">
+    <i class="fas fa-shopping-basket text-xl"></i>
+    <span class="absolute -top-1.5 -right-2 bg-[#8b2318] text-[#fdfaf6] text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-sm">0</span>
+</a>
+                    
+                    
+                    
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="text-[14px] font-bold text-[#8b2318] hover:opacity-70">Log Out</button>
+                    </form>
+
+                @else
+                    <a href="{{ url('/dashboard') }}" class="text-[14px] font-bold text-[#8b2318] hover:opacity-70">Seller Dashboard</a>
+                    <form method="POST" action="{{ route('logout') }}" class="inline ml-3">
+                        @csrf
+                        <button type="submit" class="text-[14px] font-bold text-text-dark hover:text-[#8b2318]">Log Out</button>
+                    </form>
+                @endif
+                
             @else
                 <a href="{{ route('login') }}" class="text-[14px] font-bold hover:text-[#8b2318]">Login</a>
                 <a href="{{ route('register') }}" class="text-[14px] font-bold hover:text-[#8b2318]">Sign Up</a>
@@ -51,8 +77,7 @@
         </div>
     </nav>
 
-    <!-- ─── PAGE CONTENT ─── -->
-    <main>
+    <main class="flex-grow">
         @yield('content')
     </main>
 

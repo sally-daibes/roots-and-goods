@@ -14,11 +14,11 @@
 
   <div class="relative z-10 px-10 md:px-[10%] text-white flex flex-col items-start">
     
-    <button class="stitched-banner mt-12 ml-16 px-5 py-2 text-[14px] font-bold font-headings tracking-wide cursor-pointer hover:bg-accent-red-hover transition-all">
+    <a href="{{ route('market') }}" class="stitched-banner mt-12 ml-16 px-5 py-2 text-[14px] font-bold font-headings tracking-wide cursor-pointer hover:bg-accent-red-hover transition-all inline-block text-center">
         <span class="opacity-70 text-[10px] mr-1">❖</span> 
         Explore Our Market 
         <span class="opacity-70 text-[10px] ml-1">❖</span>
-    </button>
+    </a>
 
 </div>
 

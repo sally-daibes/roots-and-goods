@@ -28,6 +28,20 @@
 
                 <div>
                     <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-[#3e2a14] font-headings font-bold text-[13px] mb-0.5" />
+                    <div class="mt-1 mb-2">
+                    <x-input-label :value="__('Account Type')" class="text-[#3e2a14] font-headings font-bold text-[13px] mb-1" />
+                    <div class="flex gap-4">
+                        <label class="flex items-center cursor-pointer bg-[#e8d5c4] px-3 py-1.5 rounded-sm shadow-inner w-full">
+                            <input type="radio" name="role" value="customer" class="text-[#8b211a] focus:ring-[#8b211a] border-none bg-white w-4 h-4" checked>
+                            <span class="ml-2 text-[13px] text-text-dark font-headings font-bold">Customer (Buy)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-[#e8d5c4] px-3 py-1.5 rounded-sm shadow-inner w-full">
+                            <input type="radio" name="role" value="cooperative" class="text-[#8b211a] focus:ring-[#8b211a] border-none bg-white w-4 h-4">
+                            <span class="ml-2 text-[13px] text-text-dark font-headings font-bold">Cooperative (Sell)</span>
+                        </label>
+                    </div>
+                    <x-input-error :messages="$errors->get('role')" class="mt-1 text-xs" />
+                </div>
                     <x-text-input id="password_confirmation" class="block w-full bg-[#e8d5c4] border-none shadow-inner rounded-sm py-1.5 focus:ring-2 focus:ring-[#3e2a14] text-text-dark text-sm"
                                     type="password"
                                     name="password_confirmation" required autocomplete="new-password" />
