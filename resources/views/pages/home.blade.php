@@ -1,31 +1,44 @@
-
-
 @extends('layouts.front')
 
 @section('content')
-    <!-- ─── HERO SECTION (Left Aligned exactly like the design) ─── -->
+<div x-data="{ showSellerPopup: false }">
+
     <section class="relative h-screen flex items-center">
 
-    <!-- Background from internet -->
-    <div class="absolute inset-0 bg-[url('http://roots-and-goods.test/images/main.png')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-[url('http://roots-and-goods.test/images/main.png')] bg-cover bg-center"></div>
 
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
 
-  <div class="relative z-10 px-10 md:px-[10%] text-white flex flex-col items-start">
-    
-    <a href="{{ route('market') }}" class="stitched-banner mt-12 ml-16 px-5 py-2 text-[14px] font-bold font-headings tracking-wide cursor-pointer hover:bg-accent-red-hover transition-all inline-block text-center">
-        <span class="opacity-70 text-[10px] mr-1">❖</span> 
-        Explore Our Market 
-        <span class="opacity-70 text-[10px] ml-1">❖</span>
-    </a>
+        <div class="relative z-10 px-10 md:px-[10%] text-white flex flex-col items-start">
+            
+            @auth
+                @if(auth()->user()->role !== 'customer')
+                    <button @click="showSellerPopup = true" class="stitched-banner mt-12 ml-16 px-5 py-2 text-[14px] font-bold font-headings tracking-wide cursor-pointer hover:bg-accent-red-hover transition-all inline-block text-center">
+                        <span class="opacity-70 text-[10px] mr-1">❖</span> 
+                        Explore Our Market 
+                        <span class="opacity-70 text-[10px] ml-1">❖</span>
+                    </button>
+                @else
+                    <a href="{{ route('market') }}" class="stitched-banner mt-12 ml-16 px-5 py-2 text-[14px] font-bold font-headings tracking-wide cursor-pointer hover:bg-accent-red-hover transition-all inline-block text-center">
+                        <span class="opacity-70 text-[10px] mr-1">❖</span> 
+                        Explore Our Market 
+                        <span class="opacity-70 text-[10px] ml-1">❖</span>
+                    </a>
+                @endif
+            @else
+                <a href="{{ route('market') }}" class="stitched-banner mt-12 ml-16 px-5 py-2 text-[14px] font-bold font-headings tracking-wide cursor-pointer hover:bg-accent-red-hover transition-all inline-block text-center">
+                    <span class="opacity-70 text-[10px] mr-1">❖</span> 
+                    Explore Our Market 
+                    <span class="opacity-70 text-[10px] ml-1">❖</span>
+                </a>
+            @endauth
 
-</div>
+        </div>
 
-</section>
+    </section>
+
     <div class="max-w-[1100px] mx-auto px-5">
         
-        <!-- ─── CATEGORIES (THE ARCHES) ─── -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 my-16">
             
             <div class="flex flex-col items-center">
@@ -66,7 +79,6 @@
 
         </div>
 
-        <!-- ─── FEATURED PRODUCTS TITLE ─── -->
         <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4 border-b border-border-tan pb-4">
             <div class="flex items-center gap-3">
                 <span class="text-accent-green text-xl">❖</span>
@@ -76,7 +88,6 @@
             <button class="bg-accent-red text-text-light px-5 py-1.5 font-headings font-bold rounded-sm shadow-md border border-[#5c1610] hover:bg-accent-red-hover transition-colors">View All ></button>
         </div>
 
-        <!-- ─── FEATURED PRODUCTS ITEMS ─── -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-20">
             
             <div class="polaroid-card flex flex-col items-center">
@@ -109,7 +120,6 @@
 
         </div>
 
-        <!-- ─── MEET OUR COOPERATIVES TITLE ─── -->
         <div class="text-center mb-8">
             <div class="flex items-center justify-center gap-4 mb-2 before:flex-1 before:border-b before:border-dashed before:border-[#8b7355] after:flex-1 after:border-b after:border-dashed after:border-[#8b7355]">
                 <h2 class="font-headings text-[32px] font-bold text-text-dark tracking-wide flex items-center gap-2">
@@ -121,30 +131,50 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-    
-    <div class="relative bg-[#fdfaf6] border-[4px] border-[#e9dec9] p-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.15)]">
-        <img src="http://roots-and-goods.test/images/tenth.png" class="w-full h-[220px] object-cover">
-        
-        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[85%] stitched-banner py-2 text-center">
-            <span class="font-headings font-bold text-[15px] tracking-wide">Olive Harvest</span>
+            
+            <div class="relative bg-[#fdfaf6] border-[4px] border-[#e9dec9] p-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.15)]">
+                <img src="http://roots-and-goods.test/images/tenth.png" class="w-full h-[220px] object-cover">
+                
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[85%] stitched-banner py-2 text-center">
+                    <span class="font-headings font-bold text-[15px] tracking-wide">Olive Harvest</span>
+                </div>
+            </div>
+
+            <div class="relative bg-[#fdfaf6] border-[4px] border-[#e9dec9] p-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.15)]">
+                <img src="http://roots-and-goods.test/images/eleven.png" class="w-full h-[220px] object-cover">
+                
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[85%] stitched-banner py-2 text-center">
+                    <span class="font-headings font-bold text-[15px] tracking-wide">Women's Craft Collective</span>
+                </div>
+            </div>
+
+            <div class="relative bg-[#fdfaf6] border-[4px] border-[#e9dec9] p-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.15)]">
+                <img src="http://roots-and-goods.test/images/twelve.png" class="w-full h-[220px] object-cover">
+                
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[85%] stitched-banner py-2 text-center">
+                    <span class="font-headings font-bold text-[15px] tracking-wide">Herbal Cooperative</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div x-show="showSellerPopup" 
+         style="display: none;" 
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+        <div @click.away="showSellerPopup = false" class="bg-[#fdfaf6] border border-[#c9b9a1] shadow-xl p-8 rounded-sm max-w-sm w-full text-center relative">
+            
+            <button @click="showSellerPopup = false" class="absolute top-3 right-4 text-[#3e2a14] opacity-50 hover:opacity-100 text-xl font-bold">&times;</button>
+            
+            <div class="text-[#8b2318] text-4xl mb-4"><i class="fas fa-store-slash"></i></div>
+            <h3 class="font-headings font-bold text-2xl text-[#3e2a14] mb-2">Access Restricted</h3>
+            <p class="text-[#3e2a14] opacity-80 mb-6 font-headings">You must be logged in as a Customer to shop. Cooperative accounts are for selling products only.</p>
+            
+            <div class="flex flex-col gap-3">
+                <button @click="showSellerPopup = false" class="stitched-banner py-2 font-bold font-headings tracking-wide w-full block">Got it</button>
+            </div>
         </div>
     </div>
 
-    <div class="relative bg-[#fdfaf6] border-[4px] border-[#e9dec9] p-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.15)]">
-        <img src="http://roots-and-goods.test/images/eleven.png" class="w-full h-[220px] object-cover">
-        
-        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[85%] stitched-banner py-2 text-center">
-            <span class="font-headings font-bold text-[15px] tracking-wide">Women's Craft Collective</span>
-        </div>
-    </div>
-
-    <div class="relative bg-[#fdfaf6] border-[4px] border-[#e9dec9] p-1.5 shadow-[0_5px_15px_rgba(0,0,0,0.15)]">
-        <img src="http://roots-and-goods.test/images/twelve.png" class="w-full h-[220px] object-cover">
-        
-        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[85%] stitched-banner py-2 text-center">
-            <span class="font-headings font-bold text-[15px] tracking-wide">Herbal Cooperative</span>
-        </div>
-    </div>
-
-</div>
-@endsection
+</div> @endsection

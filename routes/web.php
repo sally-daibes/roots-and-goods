@@ -15,10 +15,10 @@ Route::get('/', function () {
 Route::view('/about', 'pages.about')->name('about');
 Route::get('/market', [MarketplaceController::class, 'index'])->name('market');
 
-// 3. The Breeze Dashboard (Only logged-in users can see this)
+// 3. The Breeze Dashboard 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', \App\Http\Middleware\IsSeller::class])->name('dashboard');
 
 // 4. Breeze Profile Routes
 Route::middleware('auth')->group(function () {
@@ -31,7 +31,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // 6. Grouped routes so only logged-in customers can access them
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () { 
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{product}', [CartController::class, 'store'])->name('cart.add');
+
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add/{product}', [WishlistController::class, 'store'])->name('wishlist.add');
 });

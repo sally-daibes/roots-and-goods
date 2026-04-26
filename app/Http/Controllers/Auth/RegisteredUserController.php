@@ -56,5 +56,5 @@ class RegisteredUserController extends Controller
         // Cooperatives and Admins will go to the Dashboard for now
         return redirect(route('dashboard', absolute: false));
     }
-    }
+    
 }
